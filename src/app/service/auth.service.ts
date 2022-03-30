@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import { UserLogin } from '../model/UserLogin';
 import { UserModel } from '../model/UserModel';
 
@@ -22,5 +23,15 @@ export class AuthService {
 
    Cadastrar(user: UserModel): Observable<UserModel>{
     return this.http.post<UserModel>('http://localhost:8080/user/register',user)
+   }
+
+   logado(){
+     let ok: boolean = false
+
+    if(environment.token != ''){
+      ok = true
+    }
+
+     return ok
    }
 }
