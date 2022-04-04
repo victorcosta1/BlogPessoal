@@ -15,8 +15,8 @@ export class CadastrarComponent implements OnInit {
   
 
   user: UserModel = new UserModel
-  ConfirmarSenha: String
-  tipoUsuario: String
+  ConfirmarSenha: string
+  tipoUsuario: string
 
   constructor(
     private authService: AuthService,
