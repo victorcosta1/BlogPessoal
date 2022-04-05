@@ -15,6 +15,7 @@ import { TemaService } from '../service/tema.service';
 export class InicioComponent implements OnInit {
 
   postagem: UserPostagem = new UserPostagem();
+  listaPostagens: UserPostagem[];
   
   tema: UserTema = new UserTema();
   listaTemas: UserTema[];
@@ -36,6 +37,7 @@ export class InicioComponent implements OnInit {
     }
 
     this.getAllTemas()
+    this.getAllPostagens()
   }
 
   getAllTemas(){
@@ -50,7 +52,11 @@ export class InicioComponent implements OnInit {
    })
  }
 
-
+ getAllPostagens(){
+   this.postagemService.getAllPostagens().subscribe((resp: UserPostagem[])=>{
+    this.listaPostagens = resp
+   })
+ }
 
   publicar(){
     this.tema.id = this.idTema
@@ -63,6 +69,7 @@ export class InicioComponent implements OnInit {
       this.postagem = resp
       alert('Postagem realizada com sucesso!')
       this.postagem = new UserPostagem()
+      this.getAllPostagens()
     })
   }
 
