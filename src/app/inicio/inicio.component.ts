@@ -63,7 +63,7 @@ export class InicioComponent implements OnInit {
     this.postagem.UserTema = this.tema
 
     this.user.id = this.idUser
-    this.postagem.UserModel = this.user
+    this.postagem.userModel = this.user
 
     this.postagemService.postPostagem(this.postagem).subscribe((resp: UserPostagem) =>{
       this.postagem = resp

@@ -7,7 +7,7 @@ export class UserPostagem{
     public description: string;
     public date: Date;
 
-    public UserModel: UserModel
+    public userModel: UserModel
 
     public UserTema: UserTema 
 }
