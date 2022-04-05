@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.prod';
+import { UserModel } from '../model/UserModel';
+import { UserPostagem } from '../model/UserPostagem';
+import { UserTema } from '../model/UserTema';
+import { PostagemService } from '../service/postagem.service';
+import { TemaService } from '../service/tema.service';
 
 @Component({
   selector: 'app-inicio',
@@ -9,8 +14,19 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class InicioComponent implements OnInit {
 
+  postagem: UserPostagem = new UserPostagem();
+  
+  tema: UserTema = new UserTema();
+  listaTemas: UserTema[];
+  idTema: number;
+
+  user: UserModel = new UserModel();
+  idUser = environment.id;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private postagemService: PostagemService,
+    private temaService: TemaService
   ) { }
 
   ngOnInit(){
@@ -18,6 +34,36 @@ export class InicioComponent implements OnInit {
       /*alert('Sua seção expirou, faça o login novamente.')*/
       this.router.navigate(['/entrar'])
     }
+
+    this.getAllTemas()
+  }
+
+  getAllTemas(){
+    this.temaService.getAllTema().subscribe((resp: UserTema[])=>{
+      this.listaTemas = resp
+    })
+  }
+
+ findByIdTema(){
+   this.temaService.getByIdTema(this.idTema).subscribe((resp: UserTema)=>{
+     this.tema = resp
+   })
+ }
+
+
+
+  publicar(){
+    this.tema.id = this.idTema
+    this.postagem.UserTema = this.tema
+
+    this.user.id = this.idUser
+    this.postagem.UserModel = this.user
+
+    this.postagemService.postPostagem(this.postagem).subscribe((resp: UserPostagem) =>{
+      this.postagem = resp
+      alert('Postagem realizada com sucesso!')
+      this.postagem = new UserPostagem()
+    })
   }
 
 }
