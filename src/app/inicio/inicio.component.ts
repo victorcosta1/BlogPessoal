@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.prod';
 import { UserModel } from '../model/UserModel';
 import { UserPostagem } from '../model/UserPostagem';
 import { UserTema } from '../model/UserTema';
+import { AuthService } from '../service/auth.service';
 import { PostagemService } from '../service/postagem.service';
 import { TemaService } from '../service/tema.service';
 
@@ -24,10 +25,12 @@ export class InicioComponent implements OnInit {
   user: UserModel = new UserModel();
   idUser = environment.id;
 
+
   constructor(
     private router: Router,
     private postagemService: PostagemService,
-    private temaService: TemaService
+    private temaService: TemaService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(){
@@ -42,35 +45,48 @@ export class InicioComponent implements OnInit {
 
   getAllTemas(){
     this.temaService.getAllTema().subscribe((resp: UserTema[])=>{
-      this.listaTemas = resp
+      this.listaTemas = resp;
     })
   }
 
  findByIdTema(){
    this.temaService.getByIdTema(this.idTema).subscribe((resp: UserTema)=>{
-     this.tema = resp
+     this.tema = resp;
    })
+ }
+
+ findByIdUser(){
+  this.authService.getByIdUser(this.idUser).subscribe((resp:UserModel)=>{
+    this.user = resp;
+  })
  }
 
  getAllPostagens(){
    this.postagemService.getAllPostagens().subscribe((resp: UserPostagem[])=>{
-    this.listaPostagens = resp
+    this.listaPostagens = resp;
    })
  }
 
   publicar(){
-    this.tema.id = this.idTema
-    this.postagem.UserTema = this.tema
+    this.tema.id = this.idTema;
+    this.postagem.userTema = this.tema;
 
-    this.user.id = this.idUser
+    this.user.id = this.idUser;
     this.postagem.userModel = this.user
 
-    this.postagemService.postPostagem(this.postagem).subscribe((resp: UserPostagem) =>{
+    this.postagemService.postPostagem(this.postagem).subscribe(
+      
+      (resp: UserPostagem) =>{
+      
       this.postagem = resp
-      alert('Postagem realizada com sucesso!')
-      this.postagem = new UserPostagem()
-      this.getAllPostagens()
+      alert("Postagem realizada com sucesso!");
+      this.postagem = new UserPostagem();
+      
+      this.getAllPostagens();
+
     })
   }
+
+  
 
 }
