@@ -69,10 +69,10 @@ export class InicioComponent implements OnInit {
 
   publicar(){
     this.tema.id = this.idTema;
-    this.postagem.userTema = this.tema;
+    this.postagem.theme = this.tema;
 
     this.user.id = this.idUser;
-    this.postagem.userModel = this.user
+    this.postagem.user = this.user
 
     this.postagemService.postPostagem(this.postagem).subscribe(
       

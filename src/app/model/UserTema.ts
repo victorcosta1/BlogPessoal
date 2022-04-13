@@ -5,5 +5,5 @@ export class UserTema{
     public description: string;
     
 
-    public userPostagem: UserPostagem[]
+    public user: UserPostagem[]
 }

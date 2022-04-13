@@ -8,6 +8,6 @@ export class UserPostagem{
     public date: Date;
 
 
-    public userModel: UserModel
-    public userTema: UserTema 
+    public user: UserModel;
+    public theme: UserTema;
 }

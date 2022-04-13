@@ -9,5 +9,5 @@ export class UserModel{
     public photo: string;
     public type: string
 
-    public userPostagem: UserPostagem[]
+    public postagem: UserPostagem[]
 }
