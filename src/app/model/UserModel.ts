@@ -2,12 +2,12 @@ import { UserPostagem } from "./UserPostagem";
 
 export class UserModel{
     public id: number;
-    public name: String;
-    public user: String
-    public password: String
+    public name: string;
+    public user: string
+    public password: string
 
-    public photo: String;
-    public type: String
+    public photo: string;
+    public type: string
 
-    public UserPostagem: UserPostagem[]
+    public postagem: UserPostagem[]
 }

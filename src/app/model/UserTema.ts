@@ -2,7 +2,8 @@ import { UserPostagem } from "./UserPostagem";
 
 export class UserTema{
     public id: number;
-    public description: String;
+    public description: string;
+    
 
-    public UserPostagem: UserPostagem[]
+    public user: UserPostagem[]
 }
